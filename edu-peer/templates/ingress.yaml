@@ -31,5 +31,10 @@ spec:
             backend:
               serviceName: {{ $fullName }}
               servicePort: request
+          - path: /event
+            backend:
+              serviceName: {{ $fullName }}
+              servicePort: event
+
   {{- end }}
 {{- end }}
