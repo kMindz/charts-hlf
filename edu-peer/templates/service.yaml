@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "educhain.fullname" . }}
+  labels:
+{{ include "labels.standard" . | indent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.portRequest }}
+      targetPort: 7051
+      protocol: TCP
+      name: request
+    - port: {{ .Values.service.portEvent }}
+      targetPort: 7053
+      protocol: TCP
+      name: event
+  selector:
+    app: {{ include "educhain.name" . }}
+    release: {{ .Release.Name }}
+#  type: LoadBalancer
+#  loadBalancerIP: "35.226.99.94"
